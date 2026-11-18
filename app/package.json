@@ -1,0 +1,20 @@
+{
+  "name": "overdrive-hub",
+  "version": "0.1.0",
+  "description": "Overdrive Hub desktop app",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "sim": "electron . --sim 4"
+  },
+  "devDependencies": {
+    "electron": "^39.8.10"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "allowScripts": {
+    "electron@39.8.10": true
+  }
+}

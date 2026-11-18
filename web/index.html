@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overdrive Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": {
+        "three": "/vendor/three/build/three.module.js",
+        "three/addons/": "/vendor/three/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <aside id="side">
+    <header>
+      <div class="brand">Overdrive <b>Hub</b></div>
+      <div id="conn" class="pill">connecting…</div>
+    </header>
+    <nav id="tabs">
+      <button data-tab="garage" class="active">Garage</button>
+      <button data-tab="tracks">Tracks</button>
+      <button data-tab="play">Play</button>
+      <button data-tab="builder">Builder</button>
+    </nav>
+
+    <section id="tab-garage" class="tab active">
+      <div class="row">
+        <button id="btn-discover" class="primary">Find cars</button>
+        <button id="btn-connect-all">Connect all</button>
+        <button id="btn-check-charge" title="Connects to each car for a moment to read its real charger + battery status (cars do not move)">Check charge</button>
+      </div>
+      <p class="hint" id="garage-hint">Turn cars on, then press Find cars. Each car is remembered by its own
+        Bluetooth address, so identical models are kept apart. Use <b>Blink</b> to see which one is which.</p>
+      <div id="roster" class="card"></div>
+      <div id="car-list"></div>
+      <h3>Nearby, not connected</h3>
+      <div id="advert-list"></div>
+    </section>
+
+    <section id="tab-tracks" class="tab">
+      <div class="card">
+        <h3>Scan a track</h3>
+        <p class="hint">Place one car on the track. It drives two slow laps in the middle lane, then the map is
+          saved. Next time the app recognises the track by itself after a car drives a few pieces.</p>
+        <div class="row">
+          <select id="scan-car"></select>
+          <button id="btn-scan" class="primary">Scan</button>
+          <button id="btn-cancel-scan" class="hidden">Cancel</button>
+        </div>
+        <div id="scan-status" class="hint"></div>
+      </div>
+      <h3>Saved tracks</h3>
+      <div id="track-list"></div>
+      <div id="track-editor" class="card hidden"></div>
+    </section>
+
+    <section id="tab-play" class="tab">
+      <div class="card">
+        <label>Game mode <select id="mode-select"></select></label>
+        <p id="mode-desc" class="hint"></p>
+        <div class="grid2">
+          <label>Laps <input id="ov-laps" type="number" min="0" max="99"></label>
+          <label>Time limit (s) <input id="ov-time" type="number" min="0" step="15"></label>
+          <label>Speed cap <input id="ov-cap" type="number" min="300" max="2000" step="50"></label>
+        </div>
+      </div>
+      <h3>Racers</h3>
+      <p class="hint">Tick the cars that play. Each one is driven by you or by an AI racer.</p>
+      <div id="participants"></div>
+      <div class="row">
+        <button id="btn-fill-ai">Fill empty seats with AI</button>
+      </div>
+      <div class="row big">
+        <button id="btn-start" class="primary">Start</button>
+        <button id="btn-stop-game">End game</button>
+      </div>
+      <div class="card hint" id="controls-help">
+        <b>Your car</b>: W / S speed, A / D lanes, Space fire, M mine, X brake.
+        Gamepads: right trigger speed, left trigger brake, bumpers or stick for lanes, A fire, B mine.
+        Pads are given to human-driven cars in order.
+      </div>
+    </section>
+
+    <section id="tab-builder" class="tab">
+      <div class="card">
+        <h3>Racers</h3>
+        <div id="racer-list" class="chips"></div>
+        <form id="racer-form" class="form"></form>
+      </div>
+      <div class="card">
+        <h3>Game modes</h3>
+        <div id="mode-list" class="chips"></div>
+        <form id="mode-form" class="form"></form>
+      </div>
+    </section>
+  </aside>
+
+  <main id="stage">
+    <canvas id="view"></canvas>
+    <div id="hud-top">
+      <div id="track-name"></div>
+      <div id="game-banner"></div>
+    </div>
+    <div id="countdown" class="hidden"></div>
+    <div id="board" class="hidden"></div>
+    <div id="view-buttons">
+      <button data-cam="orbit" class="active">Orbit</button>
+      <button data-cam="top">Top</button>
+      <button data-cam="chase">Chase</button>
+    </div>
+    <button id="btn-stop-all" title="Stop every car now (Esc)">STOP ALL</button>
+    <div id="toasts"></div>
+    <div id="empty-hint" class="hidden">No track loaded. Scan one in <b>Tracks</b>, or just start driving a car on a saved
+      track and it will be recognised.</div>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

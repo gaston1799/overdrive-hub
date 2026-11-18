@@ -1,0 +1,16 @@
+# environments / dependencies (recreated by setup)
+.venv/
+app/node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# your own data: garage (car Bluetooth addresses), tracks, scan + test logs
+data/
+data-sim/
+
+# misc
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
